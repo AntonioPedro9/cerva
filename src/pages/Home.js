@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text, Portal, Modal, RadioButton, Button, FAB } from 'react-native-paper';
+import { Text, Portal, Modal, RadioButton, IconButton, Button, FAB, TextInput } from 'react-native-paper';
 
 export default function Home() {
 	const [lata, setLata] = React.useState(0);
@@ -49,26 +49,44 @@ export default function Home() {
 
 					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 						<RadioButton value="lata" status={selectedBeer === 'lata' ? 'checked' : 'unchecked'} onPress={() => setSelectedBeer('lata')} />
-						<Text>Lata</Text>
+						<Text style={{ fontSize: 16 }}>Lata</Text>
 					</View>
 
 					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 						<RadioButton value="longneck" status={selectedBeer === 'longneck' ? 'checked' : 'unchecked'} onPress={() => setSelectedBeer('longneck')} />
-						<Text>Longneck</Text>
+						<Text style={{ fontSize: 16 }}>Longneck</Text>
 					</View>
 
 					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 						<RadioButton value="garrafa" status={selectedBeer === 'garrafa' ? 'checked' : 'unchecked'} onPress={() => setSelectedBeer('garrafa')} />
-						<Text>Garrafa</Text>
+						<Text style={{ fontSize: 16 }}>Garrafa</Text>
 					</View>
 
 					<View style={styles.quantityContainer}>
-						<FAB small icon="minus" onPress={decrementQuantity} />
-						<Text style={{ fontSize: 30 }}>{quantity}</Text>
-						<FAB small icon="plus" onPress={incrementQuantity} />
+						<IconButton
+							icon="minus"
+							color="#ffc107"
+							size={32}
+							onPress={decrementQuantity}
+						/>
+						<Text style={{ fontSize: 32 }}>{quantity}</Text>
+						<IconButton
+							icon="plus"
+							color="#ffc107"
+							size={32}
+							onPress={incrementQuantity}
+						/>
 					</View>
 
-					<Button mode="contained" style={{ marginTop: 8 }} icon="check" onPress={setBeerQuantity}>Adicionar</Button>
+					<TextInput
+						placeholder={`Preço da ${selectedBeer}`}
+						mode="outlined"
+						keyboardType="numeric"
+						style={{ backgroundColor: "transparent" }}
+						dense
+					/>
+
+					<Button mode="contained" style={{ marginTop: 16 }} icon="check" onPress={setBeerQuantity}>Adicionar</Button>
 				</Modal>
 			</Portal>
 
@@ -81,14 +99,13 @@ const styles = StyleSheet.create({
 	formPopup: {
 		margin: 32,
 		padding: 16,
-		justifyContent: 'space-evenly',
 		backgroundColor: '#444',
 		borderRadius: 2,
 	},
 	quantityContainer: {
-		paddingVertical: 16,
+		marginVertical: 8,
 		flexDirection: 'row',
-		justifyContent: 'space-around',
+		justifyContent: 'space-evenly',
 		alignItems: 'center'
 	},
 	fabButton: {
